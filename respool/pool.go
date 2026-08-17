@@ -457,6 +457,7 @@ func (p *Pool) removeWaiterLocked(w *waiter) {
 	for i, x := range p.waiters {
 		if x == w {
 			p.waiters = append(p.waiters[:i], p.waiters[i+1:]...)
+			p.tryGrantWaitersLocked()
 			return
 		}
 	}
